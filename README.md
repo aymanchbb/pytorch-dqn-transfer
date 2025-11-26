@@ -14,7 +14,7 @@ The project is divided into progressive phases:
 Before attempting any transfer, I needed a solid baseline. I implemented a DQN agent from scratch using PyTorch (no high-level RL libraries).
 * **Architecture:** 3 fully connected hidden layers (128 units each).
 * **Key components:** Experience Replay, Target Network, Epsilon-Greedy exploration.
-* **Results:** The agent solves the environment consistently, reaching the max score of 500 around episode 350.
+* **Results:** The agent solves the environment consistently, reaching the max score of 500 around episode 300.
 
 ### Phase 2: Transfer with Differential Fine-Tuning (In progress)
 **Goal:** Reuse the physics knowledge (weights) acquired by the CartPole agent while quickly adapting to the new Acrobot control system.
