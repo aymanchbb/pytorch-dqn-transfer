@@ -28,7 +28,7 @@ Before attempting any transfer, I needed a solid baseline. I implemented a DQN a
 ### Phase 3: Pre & Post-processing Layers (Not yet Started)
 **Goal:** Improve the quality of the transfer by adapting the signal *before* it reaches the pre-trained core.
 * **Hypothesis:** Direct connection between raw Acrobot states and the CartPole hidden layers is suboptimal.
-* **Method:** We will add dedicated **Adapter Layers** (pre/post-processing layers) to the architecture. These layers will also be trained with a high Learning Rate to learn how to efficiently "translate" Acrobot's complex angle/velocity inputs into the specific format that the original CartPole brain is best at processing.
+* **Method:** We will add dedicated **Adapter Layers** (pre/post-processing layers) to the architecture. These layers will also be trained with a high Learning Rate to learn how to efficiently "translate" Acrobot's complex angle/velocity inputs into the specific format that the original CartPole brain is best at processing. Just like in phase 2, we will use the differential fine-tuning method.
 * **Key components :**
 * **Results:**
 
