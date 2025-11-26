@@ -49,3 +49,15 @@ pip install -r requirements.txt
 ## 📝 Author's Note
 This project was developed during my **Undergraduate studies**. 
 It represents an educational exploration where I aimed to build algorithms manually (without high-level libraries) to deeply understand the mechanics of Loss Functions, Backpropagation, and Gradient Descent in Reinforcement Learning.
+
+## Phase 1 : Solving CartPole-v1 
+
+To solve CartPole, I used a Q-learning algorithm. I assumed that if the agent could maintain a good score 20 times in a row, then it was sufficient.
+
+Why? Because for my experiments, I just need a brain that understands basic physical concepts like gravity to test my Transfer Learning algorithms.
+
+Here are the training results using the specific seed:
+![The agent's progress in the game](phase1_cartpole/learning_process_graph.png)
+
+Here is a satisfying GIF of the agent mastering the CartPole environment : 
+![The agent performance][phase1_cartpole/perfectCartPole.gif]
