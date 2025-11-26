@@ -60,4 +60,4 @@ Here are the training results using the specific seed:
 ![The agent's progress in the game](phase1_cartpole/learning_process_graph.png)
 
 Here is a satisfying GIF of the agent mastering the CartPole environment : 
-![The agent performance][phase1_cartpole/perfectCartPole.gif]
+![The agent performance](phase1_cartpole/perfectCartPole.gif)
