@@ -16,11 +16,9 @@ Before attempting any transfer, I needed a solid baseline. I implemented a DQN a
 * **Key components:** Experience Replay, Target Network, Epsilon-Greedy exploration.
 * **Results:** The agent solves the environment consistently, reaching the max score of 500 around episode 300.
 
-### Phase 2: Transfer with Differential Fine-Tuning (In progress)
+### Phase 2: Transfer from CartPole-v1 to Acrobot (In progress)
 **Goal:** Reuse the physics knowledge (weights) acquired by the CartPole agent while quickly adapting to the new Acrobot control system.
-* **Method:** We perform initial "Network Surgery" (replacing the input and output layers to match the new dimensions: 4→6 and 2→3). The entire network is then trained using a **Differential Learning Rate** strategy.
-    * The "new" layers (Input/Output) use a high Learning Rate to learn quickly from scratch.
-    * The "transferred" core layers (Hidden Layers) use a very low Learning Rate to gently fine-tune the learned physics features without destroying the original knowledge.
+* **Method:** We perform initial "Network Surgery" (replacing the input and output layers to match the new dimensions: 4→6 and 2→3). Then we train the model using the same strategy as in phase 1, changing only the hyperparameters and the initial brain state. We then compare the results by attempting to train a blank brain to Acrobot with the hyperparameters from phases 1 and 2.
      
 * **Key components:** (Not yet)
 * **Results:** (Not Yet)
@@ -28,14 +26,20 @@ Before attempting any transfer, I needed a solid baseline. I implemented a DQN a
 ### Phase 3: Pre & Post-processing Layers (Not yet Started)
 **Goal:** Improve the quality of the transfer by adapting the signal *before* it reaches the pre-trained core.
 * **Hypothesis:** Direct connection between raw Acrobot states and the CartPole hidden layers is suboptimal.
-* **Method:** We will add dedicated **Adapter Layers** (pre/post-processing layers) to the architecture. These layers will also be trained with a high Learning Rate to learn how to efficiently "translate" Acrobot's complex angle/velocity inputs into the specific format that the original CartPole brain is best at processing. Just like in phase 2, we will use the differential fine-tuning method.
+* **Method:** We will add dedicated **Adapter Layers** (pre/post-processing layers) to the architecture. The entire network is then trained using a **Differential Learning Rate** strategy.
+
+    * The adapter layers use a high Learning Rate to learn quickly from scratch.
+    * The "transferred" core layers (Hidden Layers) use a very low Learning Rate to gently fine-tune the learned physics features without destroying the original knowledge.
+
 * **Key components :**
 * **Results:**
 
-### Phase 4: Dual-Network Architecture (The Consultant) (Not yet started)
-**Goal:** Train a completely new network for Acrobot that uses the old network as a tool.
-* **Method:** I will create a fresh network for Acrobot. However, the frozen CartPole network will run in parallel. The new network will receive the Acrobot state *AND* the output of the CartPole network as inputs.
-* **Concept:** The old brain acts as a "consultant" or a feature extractor. The new brain decides whether to listen to it or not.
+### Phase 4: Oracle Network Architecture (Not yet started)
+*That architectural term doesn't really exist to my knowledge; I didn't know what to call it.*
+
+**Goal:** Train a completely new network for Acrobot that uses the old network as a tool. 
+* **Method:** We're going to create a classic fresh neural network for Acrobot, except that between two layers, the neurons will not only be connected to the next layer, but they will also be connected to CartPole's brain, which will perform its usual calculation before passing it back to the next layer of neurons.
+* **Concept:** The new brain decides how to interpret, how to use, and whether or not to listen to what the old brain tells it.
 * **Key components :**
 * **Results:**
 ## Installation
