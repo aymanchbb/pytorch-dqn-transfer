@@ -1,5 +1,8 @@
 torch
-math
 numpy
-gymnasium
 matplotlib
+gymnasium
+gymnasium[box2d]
+swig
+moviepy
+imageio
