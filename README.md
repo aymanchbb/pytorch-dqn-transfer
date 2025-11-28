@@ -1,4 +1,4 @@
-# Transfer Learning Experiment: CartPole to LunarLander-v3
+# Transfer Learning Experiment: CartPole to LunarLander
 
 This project explores the concept of Transfer Learning in Deep Reinforcement Learning.
 
