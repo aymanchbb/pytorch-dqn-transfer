@@ -66,3 +66,10 @@ Here are the training results using the specific seed:
 
 Here is a satisfying GIF of the agent mastering the CartPole environment : 
 ![The agent performance](phase1_cartpole/perfectCartPole.gif)
+
+## Phase 2 : Transfer from CartPole-v1 to LunarLander-v3
+
+### Test 1 : Naive Transfer 
+We firstly tried to do the transfer in a naive way. We simply loaded Cartpole's brain in the hidden layers and we freezed the hidden layers. Then we did the same algorithm as the first phase. 
+However, our results weren't very concluant. 
+
