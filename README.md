@@ -69,6 +69,14 @@ Here is a satisfying GIF of the agent mastering the CartPole environment :
 
 ## Phase 2 : Transfer from CartPole-v1 to LunarLander-v3
 
+### Test 0 : Acrobot 
+Before attempting to test on LunarLander, I wanted to do it on Acrobot. However, we reached no concluant results. We solved Acrobot with some scores above -73 but the efficency wasn't better than starting with random neurons. We supposed that our bad results are caused by the fact that Acrobot and CartPole have very differents goals.
+
+As a compensation, I want to show this GIF of an impressive performance of Acrobot ! 
+
+![Acrobot performance](phase2_transfer_lunarlander/acrobot_high_score.gif)
+
+
 ### Test 1 : Naive Transfer 
 We firstly tried to do the transfer in a naive way. We simply loaded Cartpole's brain in the hidden layers and we freezed the hidden layers. Then we did the same algorithm as the first phase. 
 However, our results weren't very concluant. 
