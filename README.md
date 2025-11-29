@@ -90,3 +90,4 @@ And here are the results we obtained using random weights (close to zero) instea
 
 ![LunarLanderTest1WithoutBrain](phase2_transfer_lunarlander/test1/test1_lunarlander_temoinbrain.png) 
 
+### Test 2 : Differential Learning Rate 
