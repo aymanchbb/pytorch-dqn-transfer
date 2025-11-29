@@ -77,7 +77,16 @@ As a compensation, I want to show this GIF of an impressive performance of Acrob
 ![Acrobot performance](phase2_transfer_lunarlander/acrobot_high_score.gif)
 
 
+
 ### Test 1 : Naive Transfer 
-We firstly tried to do the transfer in a naive way. We simply loaded Cartpole's brain in the hidden layers and we freezed the hidden layers. Then we did the same algorithm as the first phase. 
-However, our results weren't very concluant. 
+We firstly tried to perform the transfer using a naive approach. We simply loaded Cartpole's 'brain' (i.e., its trained weights) into the hidden layers and froze these layers. We then applied the same algorithm as in the first phase. Note that only the input and output layers were modified.
+
+Our results were not very conclusive; however, we observed an interesting phenomenon in the control experiment (or control group): **Reservoir Computing**.
+
+Here are the results we obtained using the CartPole's 'brain' weights. We did not even reach a stable score of zero after 600 episodes:
+![LunarLanderTest1WithBrain](phase2_transfer_lunarlander/test1/test1_lunarlander_loadbrain.png)
+
+And here are the results we obtained using random weights (close to zero) instead of the CartPole's 'brain' weights. Only the input and output layers were active, yet we reached a stable score of 150 in just 400 episodes. This is all the more impressive given that the training was significantly faster (in terms of time) than if we had also allowed the modification of the environment parameters.
+
+![LunarLanderTest1WithoutBrain](phase2_transfer_lunarlander/test1/test1_lunarlander_temoinbrain.png) 
 
