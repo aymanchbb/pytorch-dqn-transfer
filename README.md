@@ -18,8 +18,8 @@ Before attempting any transfer, I needed a solid baseline. I implemented a DQN a
 
 ### Phase 2: Transfer from CartPole-v1 to LunarLander-v3 (In progress)
 **Challenges:** *Negative Transfer Analysis:* We initially hypothesized that transfer learning could accelerate training on Acrobot-v1. However, results showed a negative transfer, caused by the fundamental misalignment of physical goals between the source (Stabilization) and target (Momentum) tasks. Detailed findings are discussed in the "Phase 2" section.
-**Goal:** Reuse the physics knowledge (weights) acquired by the CartPole agent while quickly adapting to the new Acrobot control system.
-* **Method:** We perform initial "Network Surgery" (replacing the input and output layers to match the new dimensions: 4→6 and 2→3). Then we train the model using the same strategy as in phase 1, changing only the hyperparameters and the initial brain state. We then compare the results by attempting to train a blank brain to Acrobot with the hyperparameters from phases 1 and 2.
+* **Goal:** Reuse the physics knowledge (weights) acquired by the CartPole agent while quickly adapting to the new LunarLander control system.
+* **Method:** We perform initial "Network Surgery" (replacing the input and output layers to match the new dimensions: 4→6 and 2→3). Then we train the model using two differents strategies (test 1 and test 2), changing only the hyperparameters and the initial brain state. We then compare the results by attempting to train a blank brain to LunarLander with the hyperparameters from phases 1 and 2.
      
 * **Key components:** Differential Learning Rate, Reservoir Computing
 * **Results:**
@@ -33,7 +33,6 @@ Before attempting any transfer, I needed a solid baseline. I implemented a DQN a
     * The adapter layers use a high Learning Rate to learn quickly from scratch.
     * The "transferred" core layers (Hidden Layers) use a very low Learning Rate to gently fine-tune the learned physics features without destroying the original knowledge.
 
-* **Key components :**
 * **Results:**
 
 ### Phase 4: Oracle Network Architecture (Not yet started)
