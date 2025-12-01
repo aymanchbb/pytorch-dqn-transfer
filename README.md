@@ -22,9 +22,8 @@ Before attempting any transfer, I needed a solid baseline. I implemented a DQN a
 * **Method:** We perform initial "Network Surgery" (replacing the input and output layers to match the new dimensions: 4→6 and 2→3). Then we train the model using the same strategy as in phase 1, changing only the hyperparameters and the initial brain state. We then compare the results by attempting to train a blank brain to Acrobot with the hyperparameters from phases 1 and 2.
      
 * **Key components:** Differential Learning Rate, Reservoir Computing
-* **Results:** * Our Naive Transfer didn't perform well, but it revealed an interesting Reservoir Computing phenomenon.
-  
-               * With the Differential Learning Rate, we achieved promising results, saving about 53 episodes on average.
+* **Results:**
+   Our Naive Transfer didn't perform well, but it revealed an interesting Reservoir Computing phenomenon. With the Differential Learning Rate, we achieved promising results, saving about 53 episodes on average.
   
 ### Phase 3: Pre & Post-processing Layers (Not yet Started)
 **Goal:** Improve the quality of the transfer by adapting the signal *before* it reaches the pre-trained core.
