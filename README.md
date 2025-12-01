@@ -94,5 +94,5 @@ And here are the results we obtained using random weights (close to zero) instea
 ### Test 2 : Differential Learning Rate 
 Then, we tried a more flexible approach using a Differential Learning Rate. We chose a LR of 0.001 for the new layers and 0.00001 for the hidden layers. 
 This method gave us good results. We compared a "control group" (baseline) against our CartPole-based model using different seeds: 42, 8, 12, 9, 1000, and 1032. 
-In every test, our method was more efficient, saving about 53 episodes on average
+In every test, our method was more efficient, saving about **53 episodes on average**.
 ![LunarLander](phase2_transfer_lunarlander/lunarlander.gif) 
