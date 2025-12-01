@@ -23,6 +23,7 @@ Before attempting any transfer, I needed a solid baseline. I implemented a DQN a
      
 * **Key components:** Differential Learning Rate, Reservoir Computing
 * **Results:** * Our Naive Transfer didn't perform well, but it revealed an interesting Reservoir Computing phenomenon.
+  
                * With the Differential Learning Rate, we achieved promising results, saving about 53 episodes on average.
   
 ### Phase 3: Pre & Post-processing Layers (Not yet Started)
