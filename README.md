@@ -21,8 +21,9 @@ Before attempting any transfer, I needed a solid baseline. I implemented a DQN a
 **Goal:** Reuse the physics knowledge (weights) acquired by the CartPole agent while quickly adapting to the new Acrobot control system.
 * **Method:** We perform initial "Network Surgery" (replacing the input and output layers to match the new dimensions: 4→6 and 2→3). Then we train the model using the same strategy as in phase 1, changing only the hyperparameters and the initial brain state. We then compare the results by attempting to train a blank brain to Acrobot with the hyperparameters from phases 1 and 2.
      
-* **Key components:** (Not yet)
-* **Results:** (Not Yet)
+* **Key components:** Differential Learning Rate, Reservoir Computing
+* **Results:** * Our Naive Transfer didn't perform well, but it revealed an interesting Reservoir Computing phenomenon.
+               * With the Differential Learning Rate, we achieved promising results, saving about 53 episodes on average.
   
 ### Phase 3: Pre & Post-processing Layers (Not yet Started)
 **Goal:** Improve the quality of the transfer by adapting the signal *before* it reaches the pre-trained core.
@@ -51,7 +52,7 @@ Install the required dependencies:
 pip install -r requirements.txt
 ```
 
-## 📝 Author's Note
+## Author's Note
 This project was developed during my **Undergraduate studies**. 
 It represents an educational exploration where I aimed to build algorithms manually (without high-level libraries) to deeply understand the mechanics of Loss Functions, Backpropagation, and Gradient Descent in Reinforcement Learning.
 
@@ -91,3 +92,7 @@ And here are the results we obtained using random weights (close to zero) instea
 ![LunarLanderTest1WithoutBrain](phase2_transfer_lunarlander/test1/test1_lunarlander_temoinbrain.png) 
 
 ### Test 2 : Differential Learning Rate 
+Then, we tried a more flexible approach using a Differential Learning Rate. We chose a LR of 0.001 for the new layers and 0.00001 for the hidden layers. 
+This method gave us good results. We compared a "control group" (baseline) against our CartPole-based model using different seeds: 42, 8, 12, 9, 1000, and 1032. 
+In every test, our method was more efficient, saving about 53 episodes on average
+![LunarLander](phase2_transfer_lunarlander/lunarlander.gif) 
