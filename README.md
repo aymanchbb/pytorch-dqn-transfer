@@ -10,13 +10,13 @@ I wanted to test if a Deep Q-Network (DQN) could do the same: learn the laws of 
 
 The project is divided into progressive phases:
 
-### Phase 1: Solving CartPole-v1 (Completed)
+### Phase 1: Solving CartPole-v1 
 Before attempting any transfer, I needed a solid baseline. I implemented a DQN agent from scratch using PyTorch (no high-level RL libraries).
 * **Architecture:** 3 fully connected hidden layers (128 units each).
 * **Key components:** Experience Replay, Target Network, Epsilon-Greedy exploration.
 * **Results:** The agent solves the environment consistently, reaching the max score of 500 around episode 300.
 
-### Phase 2: Transfer from CartPole-v1 to LunarLander-v3 (Completed)
+### Phase 2: Transfer from CartPole-v1 to LunarLander-v3 
 **Challenges:** *Negative Transfer Analysis:* We initially hypothesized that transfer learning could accelerate training on Acrobot-v1. However, results showed a negative transfer, caused by the fundamental misalignment of physical goals between the source (Stabilization) and target (Momentum) tasks. Detailed findings are discussed in the "Phase 2" section.
 * **Goal:** Reuse the physics knowledge (weights) acquired by the CartPole agent while quickly adapting to the new LunarLander control system.
 * **Method:** We perform initial "Network Surgery" (replacing the input and output layers to match the new dimensions: 4→6 and 2→3). Then we train the model using two differents strategies (test 1 and test 2), changing only the hyperparameters and the initial brain state. We then compare the results by attempting to train a blank brain to LunarLander with the hyperparameters from phases 1 and 2.
@@ -25,24 +25,21 @@ Before attempting any transfer, I needed a solid baseline. I implemented a DQN a
 * **Results:**
    Our Naive Transfer didn't perform well, but it revealed an interesting Reservoir Computing phenomenon. With the Differential Learning Rate, we achieved promising results, saving about 53 episodes on average.
   
-### Phase 3: Pre & Post-processing Layers (Not yet Started)
+### Phase 3: Pre & Post-processing Layers 
 **Goal:** Improve the quality of the transfer by adapting the signal *before* it reaches the pre-trained core.
 * **Hypothesis:** Direct connection between raw LunarLander states and the CartPole hidden layers is suboptimal.
-* **Method:** We will add dedicated **Adapter Layers** (pre/post-processing layers) to the architecture. The entire network is then trained using a **Differential Learning Rate** strategy.
+* **Method:** We will integrate dedicated Adapter Layers (pre-processing and post-processing layers) into the architecture. The resulting network is then trained with specific layers frozen.
 
-    * The adapter layers use a high Learning Rate to learn quickly from scratch.
-    * The "transferred" core layers (Hidden Layers) use a very low Learning Rate to gently fine-tune the learned physics features without destroying the original knowledge.
+* **Results:** The Feature Extraction method allowed us to maintain performance equivalent to a fully trained (Baseline) model while reducing the number of trainable parameters by 30% to 40%, thereby demonstrating superior Computational Efficiency.
 
-* **Results:**
 
-### Phase 4: Oracle Network Architecture (Not yet started)
+### Phase 4: Oracle Network Architecture 
 *That architectural term doesn't really exist to my knowledge; I didn't know what to call it.*
 
 **Goal:** Train a completely new network for LunarLander that uses the old network as a tool. 
 * **Method:** We're going to create a classic fresh neural network for LunarLander, except that between two layers, the neurons will not only be connected to the next layer, but they will also be connected to CartPole's brain, which will perform its usual calculation before passing it back to the next layer of neurons.
 * **Concept:** The new brain decides how to interpret, how to use, and whether or not to listen to what the old brain tells it.
-* **Key components :**
-* **Results:**
+* **Results:** We encountered the following problem: To use the oracle effectively, we must double the size of the neural layers each time we want to transpose one problem to another (otherwise, we don't get good results). This isn't feasible for many problems. We included in the folder the code that attempts to achieve this without doubling the layer size, although it didn't succeed.
 ## Installation
 
 Install the required dependencies:
@@ -94,4 +91,7 @@ And here are the results we obtained using random weights (close to zero) instea
 Then, we tried a more flexible approach using a Differential Learning Rate. We chose a LR of 0.001 for the new layers and 0.00001 for the hidden layers. 
 This method gave us good results. We compared a "control group" (baseline) against our CartPole-based model using different seeds: 42, 8, 12, 9, 1000, and 1032. 
 In every test, our method was more efficient, saving about **53 episodes on average** to achieve an average score of 150 over 10 games.
-![LunarLander](phase2_transfer_lunarlander/lunarlander.gif) 
+
+* ![LunarLander](phase2_transfer_lunarlander/lunarlander.gif)
+
+
